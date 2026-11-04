@@ -44,6 +44,7 @@ public:
   virtual void restart_rx() = 0;
   virtual int8_t get_rssi() = 0;
   virtual uint32_t get_fifo_overflow_count() const { return 0; }
+  virtual uint32_t get_rx_timeout_count() const { return 0; }
   virtual const char *get_name() = 0;
 
   // Frame-based reading interface
