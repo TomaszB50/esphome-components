@@ -168,6 +168,9 @@ public:
   gpio::InterruptType get_interrupt_type() override { return gpio::INTERRUPT_FALLING_EDGE; }
   void restart_rx() override;
   int8_t get_rssi() override;
+  uint32_t get_fifo_overflow_count() const override {
+  return fifo_overflow_count_.load(std::memory_order_relaxed);
+  }
   const char *get_name() override;
 
 protected:
