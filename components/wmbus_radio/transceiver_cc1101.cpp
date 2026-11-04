@@ -318,6 +318,7 @@ if (rxbytes_raw & 0x80) {
 
     // Timeout: 500ms without progress
     if (millis() - last_progress > 500) {
+      this->rx_timeout_count_.fetch_add(1, std::memory_order_relaxed);
       ESP_LOGW(TAG, "RX timeout after %lu bytes (need %lu)", (unsigned long)(total + offset), (unsigned long)(length + offset));
       return false;
     }
