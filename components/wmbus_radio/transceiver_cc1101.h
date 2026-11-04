@@ -1,4 +1,5 @@
 #pragma once
+#include <atomic>
 #include "transceiver.h"
 
 // CC1101 SPI command strobes
@@ -182,6 +183,7 @@ protected:
   uint8_t get_rx_bytes();
 
   int8_t last_rssi_{0};
+std::atomic<uint32_t> fifo_overflow_count_{0};
 };
 
 } // namespace wmbus_radio
