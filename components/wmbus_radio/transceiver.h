@@ -43,6 +43,7 @@ public:
   virtual gpio::InterruptType get_interrupt_type() { return gpio::INTERRUPT_RISING_EDGE; }
   virtual void restart_rx() = 0;
   virtual int8_t get_rssi() = 0;
+  virtual uint32_t get_fifo_overflow_count() const { return 0; }
   virtual const char *get_name() = 0;
 
   // Frame-based reading interface
