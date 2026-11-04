@@ -171,6 +171,9 @@ public:
   uint32_t get_fifo_overflow_count() const override {
   return fifo_overflow_count_.load(std::memory_order_relaxed);
   }
+  uint32_t get_rx_timeout_count() const override {
+  return rx_timeout_count_.load(std::memory_order_relaxed);
+  }
   const char *get_name() override;
 
 protected:
