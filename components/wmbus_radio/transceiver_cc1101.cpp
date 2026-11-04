@@ -276,11 +276,12 @@ bool CC1101::read_in_task(uint8_t *buffer, size_t length, uint32_t offset) {
   while (total < length) {
     // Check for FIFO overflow
     uint8_t rxbytes_raw = this->read_status_register(CC1101_RXBYTES);
-    if (rxbytes_raw & 0x80) {
-      ESP_LOGW(TAG, "RX FIFO overflow");
-      this->restart_rx();
-      return false;
-    }
+if (rxbytes_raw & 0x80) {
+  this->fifo_overflow_count_.fetch_add(1, std::memory_order_relaxed);
+  ESP_LOGW(TAG, "RX FIFO overflow");
+  this->restart_rx();
+  return false;
+}
 
     uint8_t available = rxbytes_raw & 0x7F;
     size_t remaining = length - total;
